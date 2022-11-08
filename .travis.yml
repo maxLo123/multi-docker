@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t idokli2289/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ik2289/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true idokli2289/react-test npm test
+  - docker run -e CI=true ik2289/react-test npm test
 
 after_success:
-  - docker build -t idokli2289/multi-client -f ./client/Dockerfile ./client
-  - docker build -t idokli2289/multi-nginx -f ./nginx/Dockerfile ./nginx
-  - docker build -t idokli2289/multi-server -f ./server/Dockerfile ./server
-  - docker build -t idokli2289/multi-worker -f ./worker/Dockerfile ./worker
+  - docker build -t ik2289/multi-client -f ./client/Dockerfile ./client
+  - docker build -t ik2289/multi-nginx -f ./nginx/Dockerfile ./nginx
+  - docker build -t ik2289/multi-server -f ./server/Dockerfile ./server
+  - docker build -t ik2289/multi-worker -f ./worker/Dockerfile ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push idokli2289/multi-client
-  - docker push idokli2289/multi-nginx
-  - docker push idokli2289/multi-server
-  - docker push idokli2289/multi-worker
+  - docker push ik2289/multi-client
+  - docker push ik2289/multi-nginx
+  - docker push ik2289/multi-server
+  - docker push ik2289/multi-worker
