@@ -1,4 +1,4 @@
-language: generic 
+language: generic
 sudo: required
 services:
   - docker
@@ -14,3 +14,8 @@ after_success:
   - docker build -t idokli2289/multi-nginx -f ./nginx/Dockerfile ./nginx
   - docker build -t idokli2289/multi-server -f ./server/Dockerfile ./server
   - docker build -t idokli2289/multi-worker -f ./worker/Dockerfile ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push idokli2289/multi-client
+  - docker push idokli2289/multi-nginx
+  - docker push idokli2289/multi-server
+  - docker push idokli2289/multi-worker
